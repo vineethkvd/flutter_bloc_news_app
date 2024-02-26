@@ -17,7 +17,7 @@ class _NewsPageWrapperState extends State<NewsPageWrapper> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => NewsBloc(NewsRepository()),
+        create: (context) => NewsBloc(),
       )
     ], child: NewsPage());
   }

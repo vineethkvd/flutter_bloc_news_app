@@ -10,12 +10,11 @@ part 'news_event.dart';
 part 'news_state.dart';
 
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
-  final NewsRepository newsRepository;
-  NewsBloc(this.newsRepository) : super(NewsInitial()) {
+  NewsBloc() : super(NewsInitial()) {
     on<FetchNewsEvent>((event, emit) async {
       emit(NewsLoading());
       try {
-        final newsList = await newsRepository.fetchNews();
+        final newsList = await NewsRepository().fetchNews();
         emit(NewsLoaded(newsList: newsList));
       } catch (e) {
         emit(NewsError());
