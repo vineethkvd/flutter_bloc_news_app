@@ -1,0 +1,3 @@
+class ApiEndPoint {
+  ApiEndPoint._();
+}
