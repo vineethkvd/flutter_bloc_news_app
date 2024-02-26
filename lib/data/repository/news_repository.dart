@@ -6,22 +6,24 @@ import 'package:http/http.dart' as http;
 import '../../core/utils/api_constant.dart';
 
 class NewsRepository {
+  final client = http.Client();
+
   Future<List<NewsModel>> fetchNews() async {
     try {
-      final response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=6842c385dc5e467eac91d810f147b54a"));
-
+      final response = await client.get(Uri.parse(
+          "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=e8c8ab89a94343fdb306149805f02275"));
       if (response.statusCode == 200) {
-        final List<dynamic> newsJson = jsonDecode(response.body);
-        final List<NewsModel> NewsList =
+        final List<dynamic> newsJson = json.decode(response.body);
+        final List<NewsModel> newsPosts =
             newsJson.map((json) => NewsModel.fromJson(json)).toList();
-        return NewsList;
+        return newsPosts;
       } else {
-        throw Exception(
-            'Failed to fetch news. Status code: ${response.statusCode}');
+        // Handle non-200 status codes (e.g., show an error message)
+        throw Exception('Failed to fetch posts');
       }
     } catch (e) {
-      throw Exception('Failed to fetch news: $e');
+      // Handle any other exceptions (e.g., network issues)
+      throw Exception('An error occurred: $e');
     }
   }
 }
