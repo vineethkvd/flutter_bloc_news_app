@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_news_app/presentation/pages/bloc/news_page.dart';
+import 'package:flutter_bloc_news_app/presentation/pages/news/news_page.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+debugShowCheckedModeBanner: false,
       home: NewsPageWrapper(),
     );
   }
